@@ -7,14 +7,18 @@ class Character {
     @required this.gender,
     @required this.id,
     @required this.image,
+    @required this.location,
     @required this.name,
+    @required this.origin,
     @required this.species,
     @required this.status,
     @required this.type,
   })  : assert(gender != null),
         assert(id != null),
         assert(image != null),
+        assert(location != null),
         assert(name != null),
+        assert(origin != null),
         assert(species != null),
         assert(status != null),
         assert(type != null);
@@ -22,11 +26,47 @@ class Character {
   final Genders gender;
   final int id;
   final String image;
+  final String location;
   final String name;
+  final String origin;
   final String species;
   final Status status;
   final String type;
-  // TODO; add location and origin
+
+  String get statusAsString {
+    String result;
+    switch (status) {
+      case Status.alive:
+        result = 'Alive 💓';
+        break;
+      case Status.dead:
+        result = 'Dead 💀';
+        break;
+      case Status.unknown:
+        result = 'Unknown ❓';
+        break;
+    }
+    return result;
+  }
+
+  String get genderAsString {
+    String result;
+    switch (gender) {
+      case Genders.female:
+        result = 'Female';
+        break;
+      case Genders.male:
+        result = 'Male';
+        break;
+      case Genders.genderless:
+        result = 'Genderless';
+        break;
+      case Genders.unknown:
+        result = 'Unknown';
+        break;
+    }
+    return result;
+  }
 
   static List<Character> fromList(List<dynamic> jsonList) =>
       jsonList.map(fromDynamic).toList();
@@ -67,7 +107,9 @@ class Character {
       gender: gender,
       id: json['id'],
       image: json['image'],
+      location: json['location']['name'],
       name: json['name'],
+      origin: json['origin']['name'],
       species: json['species'],
       status: status,
       type: json['type'],
