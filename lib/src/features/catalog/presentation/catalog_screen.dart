@@ -1,43 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_characters/src/core/bloc/api_bloc.dart';
 import 'package:rick_and_morty_characters/src/core/data/character_model.dart';
+import 'package:rick_and_morty_characters/src/core/routes/named_routes.dart';
+import 'package:rick_and_morty_characters/src/features/details/data/details_scren_arguments.dart';
 
-class CatalogScreen extends StatefulWidget {
-  @override
-  _CatalogScreenState createState() => _CatalogScreenState();
-}
-
-class _CatalogScreenState extends State<CatalogScreen> {
-  List<Character> characters;
-
-  @override
-  void initState() {
-    final apiBloc = ApiBloc();
-    apiBloc.fetchCharacters().then((value) => setState(() {
-          characters = value;
-        }));
-    super.initState();
-  }
-
+class CatalogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final apiBloc = ApiBloc();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff8bcf21),
         title: Text('Characters'),
       ),
-      body: characters == null
-          ? Center(
+      body: FutureBuilder<List<Character>>(
+        future: apiBloc.fetchCharacters(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData == false) {
+            return Center(
               child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: characters.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('${characters[index].name}'),
-                );
-              },
-            ),
+            );
+          } else {
+            if (snapshot.hasError == true) {
+              return Center(
+                child: Text('An error has ocurred'),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) {
+                  final character = snapshot.data[index];
+                  return ListTile(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        NamedRoutes.details,
+                        arguments: DetailsScreenArguments(
+                          character: character,
+                        ),
+                      );
+                    },
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.network(character.image),
+                    ),
+                    title: Text('${character.name}'),
+                  );
+                },
+              );
+            }
+          }
+        },
+      ),
     );
   }
 }
