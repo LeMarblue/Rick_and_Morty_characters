@@ -13,6 +13,7 @@ class AppTheme {
   static final dark = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.scaffoldBackground,
+    primaryColor: AppColors.primary,
     textTheme: TextTheme(
       headline4: _whiteTextStyle, // titulo de detalles
       subtitle2: _greyTextStyle,

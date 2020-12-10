@@ -10,8 +10,9 @@ class CatalogScreen extends StatelessWidget {
     final apiBloc = ApiBloc();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff8bcf21),
-        title: Text('Characters'),
+        title: Text(
+          'Characters',
+        ),
       ),
       body: FutureBuilder<List<Character>>(
         future: apiBloc.fetchCharacters(),
