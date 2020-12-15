@@ -8,4 +8,5 @@ class AppColors {
   static final secondary = Color(0xff3f8088);
   static final primaryText = Color(0xfffafafa);
   static final secondaryText = Color(0xff949494);
+  static final tertiaryColor = Color(0xff75e89e);
 }
