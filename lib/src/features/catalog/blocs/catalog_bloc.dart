@@ -10,6 +10,8 @@ class CatalogBloc {
   var _pageIndex = 1;
   var _isFinalPage = false;
 
+  bool get isfinalPage => _isFinalPage;
+
   Stream<List<Character>> get characterStream =>
       _charactersStreamController.stream;
 
@@ -22,9 +24,9 @@ class CatalogBloc {
       } else {
         _pageIndex = _pageIndex + 1;
         _allCharactersList.addAll(charactersList);
-        _charactersStreamController.sink.add(_allCharactersList);
       }
     }
+    _charactersStreamController.sink.add(_allCharactersList);
   }
 
   void throwError() {
