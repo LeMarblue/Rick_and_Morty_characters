@@ -6,13 +6,25 @@ import 'package:rick_and_morty_characters/src/core/utils/api_client.dart';
 class CatalogBloc {
   final _apiClient = ApiClient();
   final _charactersStreamController = StreamController<List<Character>>();
+  final _allCharactersList = <Character>[];
+  var _pageIndex = 1;
+  var _isFinalPage = false;
 
   Stream<List<Character>> get characterStream =>
       _charactersStreamController.stream;
 
   void getCharacters() async {
-    var charactersList = await _apiClient.fetchCharacters();
-    _charactersStreamController.sink.add(charactersList);
+    if (_isFinalPage == false) {
+      var charactersList =
+          await _apiClient.fetchCharacters(pageIndex: _pageIndex);
+      if (charactersList == null) {
+        _isFinalPage = true;
+      } else {
+        _pageIndex = _pageIndex + 1;
+        _allCharactersList.addAll(charactersList);
+        _charactersStreamController.sink.add(_allCharactersList);
+      }
+    }
   }
 
   void throwError() {
