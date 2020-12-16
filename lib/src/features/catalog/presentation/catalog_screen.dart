@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_characters/src/core/bloc/api_bloc.dart';
+import 'package:rick_and_morty_characters/src/core/utils/api_client.dart';
 import 'package:rick_and_morty_characters/src/core/data/character_model.dart';
 import 'package:rick_and_morty_characters/src/core/routes/named_routes.dart';
+import 'package:rick_and_morty_characters/src/features/catalog/blocs/catalog_boc.dart';
 import 'package:rick_and_morty_characters/src/features/details/data/details_scren_arguments.dart';
 
 class CatalogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final apiBloc = ApiBloc();
+    final catalogBloc = CatalogBloc();
+    catalogBloc.getCharacters();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Characters',
         ),
       ),
-      body: FutureBuilder<List<Character>>(
-        future: apiBloc.fetchCharacters(),
+      body: StreamBuilder<List<Character>>(
+        stream: catalogBloc.characterStream,
         builder: (context, snapshot) {
-          if (snapshot.hasData == false) {
+          if (snapshot.hasError == true) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Text('An error has ocurred'),
             );
           } else {
-            if (snapshot.hasError == true) {
+            if (snapshot.hasData == false) {
               return Center(
-                child: Text('An error has ocurred'),
+                child: CircularProgressIndicator(),
               );
             } else {
+              final characters = snapshot.data;
               return ListView.builder(
-                itemCount: snapshot.data.length,
+                itemCount: characters.length,
                 itemBuilder: (context, index) {
-                  final character = snapshot.data[index];
+                  final character = characters[index];
                   return ListTile(
                     onTap: () {
                       Navigator.of(context).pushNamed(
