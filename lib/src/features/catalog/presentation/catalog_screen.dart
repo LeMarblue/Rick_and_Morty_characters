@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_characters/src/core/data/character_model.dart';
 import 'package:rick_and_morty_characters/src/core/routes/named_routes.dart';
@@ -8,7 +10,8 @@ class CatalogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catalogBloc = CatalogBloc();
-    catalogBloc.getCharacters();
+
+    Timer(Duration(seconds: 5), catalogBloc.getCharacters);
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +29,7 @@ class CatalogScreen extends StatelessWidget {
           } else {
             if (snapshot.hasData == false) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: Image.asset('assets/main_loader.gif'),
               );
             } else {
               final characters = snapshot.data;
@@ -41,7 +44,11 @@ class CatalogScreen extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 12),
                         width: MediaQuery.of(context).size.width,
                         child: Center(
-                          child: CircularProgressIndicator(),
+                          child: Image.asset(
+                            'assets/secondary_loader.gif',
+                            height: 48,
+                            width: 48,
+                          ),
                         ),
                       );
                     }
