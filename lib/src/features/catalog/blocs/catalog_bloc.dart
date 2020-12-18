@@ -10,7 +10,7 @@ class CatalogBloc {
   var _pageIndex = 1;
   var _isFinalPage = false;
 
-  bool get isfinalPage => _isFinalPage;
+  bool get isFinalPage => _isFinalPage;
 
   Stream<List<Character>> get characterStream =>
       _charactersStreamController.stream;
