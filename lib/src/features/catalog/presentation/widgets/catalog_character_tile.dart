@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_characters/src/core/data/character_model.dart';
 import 'package:rick_and_morty_characters/src/core/routes/named_routes.dart';
-import 'package:rick_and_morty_characters/src/features/details/data/details_scren_arguments.dart';
+import 'package:rick_and_morty_characters/src/features/details/data/details_screen_arguments.dart';
 
 class CatalogCharacterTile extends StatelessWidget {
   CatalogCharacterTile({this.character});
