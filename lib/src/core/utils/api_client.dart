@@ -17,4 +17,18 @@ class ApiClient {
       return null;
     }
   }
+
+  Future<List<Character>> fetchFilteredCharacter(
+      {int pageIndex = 1, String name}) async {
+    var url = '$urlBase/character/?name=$name&page=$pageIndex';
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final results = body['results'];
+      final filteredCharacters = Character.fromList(results);
+      return filteredCharacters;
+    } else {
+      return null;
+    }
+  }
 }
