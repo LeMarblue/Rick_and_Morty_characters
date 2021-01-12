@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rick_and_morty_characters">
+    package="dev.marblue.apps.rickandmorty">
    <application
-        android:label="rick_and_morty_characters"
+        android:label="Rick and Morty Catalog"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

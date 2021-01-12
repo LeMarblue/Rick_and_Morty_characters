@@ -1,4 +1,4 @@
-package com.example.rick_and_morty_characters
+package dev.marblue.apps.rickandmorty
 
 import io.flutter.embedding.android.FlutterActivity
 
