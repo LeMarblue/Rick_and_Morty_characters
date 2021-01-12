@@ -6,3 +6,10 @@ You can get information from the character you choose like location, origin,stat
 
 All this info is consumed from the third party [Rick and Morty api](https://rickandmortyapi.com/documentation/)
 
+![catalog](public/catalog.jpg)
+
+![details](public/details.jpg)
+
+![search](public/search.jpg)
+
+![filtered](public/filtered.jpg)
