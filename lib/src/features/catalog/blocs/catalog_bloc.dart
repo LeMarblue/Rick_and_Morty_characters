@@ -29,10 +29,6 @@ class CatalogBloc {
     _charactersStreamController.sink.add(_allCharactersList);
   }
 
-  void throwError() {
-    _charactersStreamController.sink.addError('Algo falló');
-  }
-
   void dispose() {
     _charactersStreamController.close();
   }
