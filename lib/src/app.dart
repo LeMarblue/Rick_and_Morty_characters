@@ -8,7 +8,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = AppRouter();
     return MaterialApp(
-      title: 'Rick & Mory Catalog',
+      debugShowCheckedModeBanner: false,
+      title: 'Rick & Morty Catalog',
       routes: router.routes,
       initialRoute: NamedRoutes.catalog,
       theme: AppTheme.dark,
