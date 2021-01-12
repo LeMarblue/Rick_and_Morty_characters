@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_characters/src/core/routes/named_routes.dart';
 import 'package:rick_and_morty_characters/src/features/catalog/presentation/widgets/catalog_list_view.dart';
 
 class CatalogScreen extends StatelessWidget {
@@ -11,6 +12,15 @@ class CatalogScreen extends StatelessWidget {
         ),
       ),
       body: CatalogListView(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            NamedRoutes.search,
+          );
+        },
+      ),
     );
   }
 }
