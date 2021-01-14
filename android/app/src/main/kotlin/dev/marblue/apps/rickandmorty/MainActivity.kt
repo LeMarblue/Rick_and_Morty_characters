@@ -1,4 +1,4 @@
-package dev.marblue.apps.rickandmorty
+package dev.marblue.apps.rnmcatalog
 
 import io.flutter.embedding.android.FlutterActivity
 

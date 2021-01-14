@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.marblue.apps.rickandmorty">
+    package="dev.marblue.apps.rnmcatalog">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Rick and Morty Catalog"
         android:icon="@mipmap/ic_launcher">
